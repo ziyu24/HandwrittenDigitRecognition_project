@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="fc487a44-941f-4e23-8fbf-7f95bca0f3ae" name="Changes" comment="1.以手写数字识别项目为依托，构建了模型训练、推理、可视化等操作&#10;2.模型训练可以达到较高精度，模型推理能力很差">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/model/model.pt" beforeDir="false" afterPath="$PROJECT_DIR$/data/model/model.pt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/confusion_matrix_visualizer.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/net_operator.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/net_operator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/test_main.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/.venv/Lib/site-packages/_virtualenv.py" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2oml0IWXN96rC1HFlTB8X8aY6KL" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.LeNet.executor": "Run",
+    "Python.confusion_matrix_visualizer.executor": "Run",
+    "Python.net_operator.executor": "Run",
+    "Python.test_main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "E:/ProgramFile/Anaconda/Scripts/conda.exe",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "vcs.Git",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\Program\Python_Project\DL_Learn\HandwrittenDigitRecognition_project\data" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-PY-241.14494.241" />
+        <option value="bundled-python-sdk-0509580d9d50-28c9f5db9ffe-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-241.14494.241" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="fc487a44-941f-4e23-8fbf-7f95bca0f3ae" name="Changes" comment="" />
+      <created>1731482408322</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1731482408322</updated>
+      <workItem from="1731482408794" duration="70000" />
+      <workItem from="1731482484297" duration="1893000" />
+      <workItem from="1731484404855" duration="53000" />
+      <workItem from="1731484710249" duration="1112000" />
+      <workItem from="1731488488150" duration="212000" />
+      <workItem from="1731488706256" duration="27893000" />
+    </task>
+    <task id="LOCAL-00001" summary="1.以手写数字识别项目为依托，构建了模型训练、推理、可视化等操作&#10;2.模型训练可以达到较高精度，模型推理能力很差">
+      <option name="closed" value="true" />
+      <created>1731515535020</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1731515535020</updated>
+    </task>
+    <task id="LOCAL-00002" summary="1.以手写数字识别项目为依托，构建了模型训练、推理、可视化等操作&#10;2.模型训练可以达到较高精度，模型推理能力很差">
+      <option name="closed" value="true" />
+      <created>1731516717654</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1731516717654</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/src" />
+    </ignored-roots>
+    <MESSAGE value="1.以手写数字识别项目为依托，构建了模型训练、推理、可视化等操作&#10;2.模型训练可以达到较高精度，模型推理能力很差" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.以手写数字识别项目为依托，构建了模型训练、推理、可视化等操作&#10;2.模型训练可以达到较高精度，模型推理能力很差" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/HandwrittenDigitRecognition_project$net_operator.coverage" NAME="net_operator Coverage Results" MODIFIED="1731510341150" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/HandwrittenDigitRecognition_project$LeNet.coverage" NAME="LeNet Coverage Results" MODIFIED="1731502670245" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/HandwrittenDigitRecognition_project$confusion_matrix_visualizer.coverage" NAME="confusion_matrix_visualizer Coverage Results" MODIFIED="1731503783132" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/HandwrittenDigitRecognition_project$test_main.coverage" NAME="test_main Coverage Results" MODIFIED="1731519706800" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+  </component>
+</project>
