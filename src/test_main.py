@@ -9,7 +9,6 @@ from data_loader import DataLoaderMNIST
 from net_constructor import LeNet
 from net_result import NetResult
 from net_operator import NetOperator
-from confusion_matrix_visualizer import ConfusionMatrixVisualizer
 
 
 def main():
@@ -23,8 +22,8 @@ def main():
     net_result = NetResult(net, test_data)
     print("before train accuracy:", net_result.evaluate())
 
-    net_operator = NetOperator(net, train_data)
-    # net_operator.train(1)
+    net_operator = NetOperator(net, train_data, test_data)
+    net_operator.train(1)
 
     # 1.得到训练模型，模型通过 NetOperator 一般自动保存在 "../data/model/model.pt" 中
 
@@ -36,8 +35,7 @@ def main():
     print("hand write 8 infer is: ", net_operator.infer("../data/test/test_3.png"))
 
     # 4.预测结果混淆矩阵可视化
-    cm_visualizer = ConfusionMatrixVisualizer(net, test_data)
-    cm_visualizer.visualize()
+    net_operator.visualize_confusion_matrix()
 
     # 5.数据的可视化
     net_operator.visualize_predictions("../data/test")

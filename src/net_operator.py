@@ -14,11 +14,23 @@ import matplotlib.pyplot as plt
 import math
 import os
 
+import seaborn as sns
+from sklearn.metrics import confusion_matrix
+
+
+def _get_grid_size(num_images):
+    """
+    计算合适的网格大小，尽量形成一个正方形
+    """
+    return int(math.ceil(math.sqrt(num_images)))
+
 
 class NetOperator:
-    def __init__(self, net, train_data, lr=0.001, save_model=True, save_path="../data/model/model.pt"):
+    def __init__(self, net, train_data, test_data, classes=10, lr=0.001, save_model=True, save_path="../data/model/model.pt"):
         self.net = net
         self.train_data = train_data
+        self.test_data = test_data
+        self.classes = [str(i) for i in range(classes)]  # 类别标签，例如 '0', '1', ..., '9'
         self.lr = lr
         self.save_model = save_model
         self.save_path = save_path
@@ -109,7 +121,7 @@ class NetOperator:
         num_images = len(image_dir)
 
         if not grid_size:
-            grid_size = self._get_grid_size(num_images)  # 自动计算网格尺寸
+            grid_size = _get_grid_size(num_images)  # 自动计算网格尺寸
 
         fig, axes = plt.subplots(grid_size, grid_size, figsize=(grid_size * 2, grid_size * 2))
         axes = axes.flatten()  # 展平，以便于按顺序填充每个子图
@@ -128,8 +140,45 @@ class NetOperator:
         plt.tight_layout()
         plt.show()
 
-    def _get_grid_size(self, num_images):
+    def visualize_confusion_matrix(self):
         """
-        计算合适的网格大小，尽量形成一个正方形
+        公共方法：可视化混淆矩阵
         """
-        return int(math.ceil(math.sqrt(num_images)))
+        y_true, y_pred = self._get_predictions()  # 获取真实标签和预测标签
+        self._plot_confusion_matrix(y_true, y_pred)  # 绘制混淆矩阵
+
+    def _get_predictions(self):
+        """
+        私有方法：获取所有预测结果和真实标签
+
+        :return: 返回预测标签和真实标签
+        """
+        self.net.eval()  # 切换到评估模式
+        all_labels = []
+        all_preds = []
+
+        with torch.no_grad():  # 禁用梯度计算
+            for (x, y) in self.test_data:
+                output = self.net(x.view(-1, 28 * 28))  # 输入数据经过模型
+                _, predicted = torch.max(output, 1)  # 获取最大概率的标签
+
+                all_labels.extend(y.numpy())  # 真实标签
+                all_preds.extend(predicted.numpy())  # 预测标签
+
+        return all_labels, all_preds
+
+    def _plot_confusion_matrix(self, y_true, y_pred):
+        """
+        私有方法：绘制混淆矩阵的热力图
+
+        :param y_true: 真实标签
+        :param y_pred: 预测标签
+        """
+        cm = confusion_matrix(y_true, y_pred)  # 计算混淆矩阵
+
+        plt.figure(figsize=(8, 6))
+        sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=self.classes, yticklabels=self.classes)
+        plt.title('Confusion Matrix')
+        plt.xlabel('Predicted labels')
+        plt.ylabel('True labels')
+        plt.show()

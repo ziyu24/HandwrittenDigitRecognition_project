@@ -1,2 +1,13 @@
 /data/MNIST/
 /.venv/
+.idea/HandwrittenDigitRecognition_project.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/other.xml
+.idea/vcs.xml
+.idea/inspectionProfiles/profiles_settings.xml
+src/__pycache__/data_loader.cpython-37.pyc
+src/__pycache__/net_constructor.cpython-37.pyc
+src/__pycache__/net_operator.cpython-37.pyc
+*.pyc
+src/__pycache__/data_loader.cpython-37.pyc
