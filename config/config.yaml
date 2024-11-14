@@ -1,0 +1,47 @@
+---
+#Created on 11 14, 2024
+#@author: <Cui>
+#@bref: 网络的各种配置
+
+# 网络参数
+net:
+  height: 28
+  width: 28
+  input_size: 784
+#  hidden_layer_size: 128
+#  output_size: 10
+#  activation_function: ReLU
+
+# 优化器参数
+optimizer:
+  type: Adam
+  lr: 0.001
+#  weight_decay: 0.0001
+
+# 训练参数
+train:
+  mean: 0.1307
+  std: 0.3081
+  batch_size: 15
+  epochs: 1
+#  validation_split: 0.2
+#  early_stopping: True
+#  patience: 3
+
+# 数据参数
+data:
+#  dataset: MNIST
+#  augmentations: true
+  download: false
+  class_num: 10
+#  dataset_dir: "../data"
+
+#模型参数
+model:
+  save_model: true
+#  model_save_path: "../data/model/model.pt"
+
+#测试参数
+test:
+#  test_data_dir: "../data/test"   #测试文件目录
+

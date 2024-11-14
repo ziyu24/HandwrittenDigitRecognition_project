@@ -7,10 +7,11 @@ Created on 11 13, 2024
 from torchvision import transforms
 from torchvision.datasets import MNIST
 from torch.utils.data import DataLoader
+from project.src.common.config import config_yaml
 
 
 class DataLoaderMNIST:
-    def __init__(self, data_path, batch_size, shuffle=True, download=False):
+    def __init__(self, data_path, batch_size, shuffle=True, download=config_yaml['data']['download']):
         self.data_path = data_path
         self.batch_size = batch_size
         self.shuffle = shuffle

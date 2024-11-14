@@ -6,6 +6,7 @@ Created on 11 13, 2024
 
 import torch
 import matplotlib.pyplot as plt
+from project.src.common.config import config_yaml
 
 
 class NetResult:
@@ -24,7 +25,7 @@ class NetResult:
 
         with torch.no_grad():
             for (x, y) in self.data:
-                outputs = self.net.forward(x.view(-1, 28 * 28))
+                outputs = self.net.forward(x.view(-1, config_yaml['net']['input_size']))
                 for i, output in enumerate(outputs):
                     if torch.argmax(output) == y[i]:
                         n_correct += 1
@@ -44,7 +45,7 @@ class NetResult:
             if n > (number - 1):
                 break
 
-            predict = torch.argmax(self.net.forward(x[0].view(-1, 28 * 28)))
+            predict = torch.argmax(self.net.forward(x[0].view(-1, config_yaml['net']['input_size'])))
             plt.figure(n)
             plt.imshow(x[0].view(28, 28))
             plt.title("prediction: " + str(int(predict)))

@@ -5,13 +5,14 @@ Created on 11 13, 2024
 """
 
 import torch
+from project.src.common.config import config_yaml
 
 
 class LeNet(torch.nn.Module):
 
     def __init__(self):
         super().__init__()
-        self.fc1 = torch.nn.Linear(28 * 28, 64)
+        self.fc1 = torch.nn.Linear(config_yaml['net']['input_size'], 64)
         self.fc2 = torch.nn.Linear(64, 64)
         self.fc3 = torch.nn.Linear(64, 64)
         self.fc4 = torch.nn.Linear(64, 10)

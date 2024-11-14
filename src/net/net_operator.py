@@ -5,7 +5,9 @@ Created on 11 13, 2024
 """
 
 import torch
-from net_result import NetResult
+from torchvision.utils import save_image
+
+from project.src.net.net_result import NetResult
 from torchvision import transforms
 from PIL import Image
 import torch.nn.functional as F
@@ -17,6 +19,8 @@ import os
 import seaborn as sns
 from sklearn.metrics import confusion_matrix
 
+from project.src.common.config import config_yaml
+
 
 def _get_grid_size(num_images):
     """
@@ -26,7 +30,11 @@ def _get_grid_size(num_images):
 
 
 class NetOperator:
-    def __init__(self, net, train_data, test_data, classes=10, lr=0.001, save_model=True, save_path="../data/model/model.pt"):
+    def __init__(self, net, train_data, test_data,
+                 classes=config_yaml['data']['class_num'],
+                 lr=config_yaml['optimizer']['lr'],
+                 save_model=config_yaml['model']['save_model'],
+                 save_path=config_yaml['model_save_path']):
         self.net = net
         self.train_data = train_data
         self.test_data = test_data
@@ -48,7 +56,7 @@ class NetOperator:
         for epoch in range(epoch_num):
             for (x, y) in self.train_data:
                 self.net.zero_grad()
-                output = self.net.forward(x.view(-1, 28 * 28))
+                output = self.net.forward(x.view(-1, config_yaml['net']['input_size']))
                 loss = torch.nn.functional.nll_loss(output, y)
                 loss.backward()
                 optimizer.step()
@@ -72,17 +80,18 @@ class NetOperator:
         # 读取并预处理图片
         transform = transforms.Compose([
             transforms.Grayscale(num_output_channels=1),  # 转为灰度图（如果需要）
-            transforms.Resize((28, 28)),  # 调整为28x28的大小
+            transforms.Resize((config_yaml['net']['height'], config_yaml['net']['width'])),  # 调整为28x28的大小
             transforms.ToTensor(),  # 转为Tensor
-            transforms.Normalize(mean=[0.1307], std=[0.3081])  # 使用MNIST的归一化值
+            # transforms.Normalize(mean=[config_yaml['train']['mean']], std=[config_yaml['train']['std']])  # 使用MNIST的归一化值
         ])
 
         # 打开图片
         image = Image.open(image_path)
-
         # 对图片进行转换
         image_tensor = transform(image)
-
+        # # 保存图像的路径
+        # image_path = config_yaml['test_data_dir'] + '/../out_put_1.jpg'
+        # save_image(image_tensor, image_path)
         # 展平图像为1x784（batch_size, 784）张量
         image_tensor = image_tensor.view(1, -1)  # 添加batch维度，并将28x28图像展平为一维
 
@@ -90,7 +99,7 @@ class NetOperator:
         with torch.no_grad():
             # 进行推理
             output = self.net(image_tensor)  # 直接传入模型，保持 batch 维度
-            print(output)
+            # print(output)
 
             # 使用 softmax 转换为概率分布
             output_probs = F.softmax(output, dim=1)
@@ -101,6 +110,13 @@ class NetOperator:
 
         return predicted_class
 
+    def _get_grid_size(num_images):
+        """根据图像数量自动计算合适的网格大小"""
+        grid_size = int(num_images ** 0.5)  # 取平方根作为网格大小的初步估算
+        if grid_size * grid_size < num_images:
+            grid_size += 1  # 如果网格的总大小不足以放下所有图像，增加网格大小
+        return grid_size
+
     def visualize_predictions(self, image_dir, grid_size=None):
         """
         可视化预测结果，并将图像排列成正方形网格
@@ -109,24 +125,37 @@ class NetOperator:
         - image_dir: 图像目录
         - grid_size: 如果传入此参数，将会使用指定的网格尺寸
         """
-
         # 获取目录中的所有图像文件
-        image_dir = [os.path.join(image_dir, f) for f in os.listdir(image_dir) if f.endswith(('.png', '.jpg', '.jpeg'))]
+        image_files = [os.path.join(image_dir, f) for f in os.listdir(image_dir) if
+                       f.endswith(('.png', '.jpg', '.jpeg'))]
 
         image_path_predictions = []
 
-        for image_path in image_dir:
+        for image_path in image_files:
+            # 获取每个图像的预测结果
             image_path_predictions.append((image_path, self.infer(image_path)))
 
-        num_images = len(image_dir)
+        num_images = len(image_path_predictions)
 
+        if num_images == 1:
+            # 只有一张图像时，不使用子图，直接绘制
+            image_path, pred = image_path_predictions[0]
+            image = Image.open(image_path).convert("RGB")
+            plt.imshow(image)
+            plt.title(f'Pred: {pred}')
+            plt.axis('off')
+            plt.show()
+            return
+
+        # 如果没有提供grid_size，自动计算网格大小
         if not grid_size:
-            grid_size = _get_grid_size(num_images)  # 自动计算网格尺寸
+            grid_size = _get_grid_size(num_images)
 
+        # 创建子图
         fig, axes = plt.subplots(grid_size, grid_size, figsize=(grid_size * 2, grid_size * 2))
-        axes = axes.flatten()  # 展平，以便于按顺序填充每个子图
+        axes = axes.flatten()  # 将二维的axes展平，以便按顺序填充每个子图
 
-        # 遍历每个图像
+        # 遍历所有图像并绘制
         for i, (image_path, pred) in enumerate(image_path_predictions):
             image = Image.open(image_path).convert("RGB")
             axes[i].imshow(image)
@@ -159,7 +188,7 @@ class NetOperator:
 
         with torch.no_grad():  # 禁用梯度计算
             for (x, y) in self.test_data:
-                output = self.net(x.view(-1, 28 * 28))  # 输入数据经过模型
+                output = self.net(x.view(-1, config_yaml['net']['input_size']))  # 输入数据经过模型
                 _, predicted = torch.max(output, 1)  # 获取最大概率的标签
 
                 all_labels.extend(y.numpy())  # 真实标签
