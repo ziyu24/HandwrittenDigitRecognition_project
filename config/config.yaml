@@ -3,6 +3,12 @@
 #@author: <Cui>
 #@bref: 网络的各种配置
 
+
+# 数据参数
+data:
+  download: false
+  class_num: 10
+
 # 网络参数
 net:
   height: 28
@@ -24,24 +30,10 @@ train:
   std: 0.3081
   batch_size: 15
   epochs: 1
-#  validation_split: 0.2
-#  early_stopping: True
-#  patience: 3
-
-# 数据参数
-data:
-#  dataset: MNIST
-#  augmentations: true
-  download: false
-  class_num: 10
-#  dataset_dir: "../data"
 
 #模型参数
 model:
   save_model: true
-#  model_save_path: "../data/model/model.pt"
 
-#测试参数
-test:
-#  test_data_dir: "../data/test"   #测试文件目录
-
+evl:
+  use_save_model: true
